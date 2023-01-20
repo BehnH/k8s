@@ -1,0 +1,29 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: github
+  namespace: flux-system
+spec:
+  type: github
+  address: https://github.com/BehnH/k8s
+  secretRef:
+    name: github-token
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: symbiosis-prod-github
+  namespace: flux-system
+spec:
+  summary: "Symbiosis Prod"
+  providerRef:
+    name: github
+  eventSeverity: info
+  eventSources:
+    - kind: HelmRelease
+      name: "*"
+    - kind: Kustomization
+      name: "*"
+  exclusionList:
+    - "waiting.*socket"

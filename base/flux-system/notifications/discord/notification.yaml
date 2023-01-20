@@ -1,0 +1,33 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: discord
+  namespace: flux-system
+spec:
+  type: discord
+  username: Flux
+  channel: k8s
+  secretRef:
+    name: discord-url
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: symbiosis-prod-discord
+  namespace: flux-system
+spec:
+  summary: "Symbiosis Prod"
+  providerRef:
+    name: discord
+  eventSeverity: info
+  eventSources:
+    - kind: GitRepository
+      name: "*"
+    - kind: HelmRelease
+      name: "*"
+    - kind: Kustomization
+      name: "*"
+  exclusionList:
+    - "waiting.*socket"
+  suspend: false  # set to true to disable notifications

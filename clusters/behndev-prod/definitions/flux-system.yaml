@@ -1,0 +1,27 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: flux-system-helm-chart-repos
+  namespace: flux-system
+spec:
+  path: "./base/flux-system/helm-chart-repos"
+  prune: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: flux-system-notifications
+  namespace: flux-system
+spec:
+  path: "./base/flux-system/notifications"
+  prune: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: flux-system-webhook
+  namespace: flux-system
+spec:
+  path: "./base/flux-system/webhook"
+  prune: true
