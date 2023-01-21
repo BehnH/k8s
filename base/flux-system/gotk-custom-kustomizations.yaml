@@ -1,0 +1,26 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: flux-system-helm-chart-repos
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: "./base/flux-system/helm-chart-repos"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: flux-system-notifications
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: "./base/flux-system/notifications"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
